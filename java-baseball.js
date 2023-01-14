@@ -55,11 +55,35 @@ gameStart = () => {
   const strikePoint = [];
   strike = () => {
     for (let i = 0; i < input.length; i++) {
-      if (inputArr[i] == strikePoint[i]) {
+      if (inputArr[i] == computerArr[i]) {
         strikePoint += 1;
       }
     }
   };
   strike();
+
+  //--
+
+  const ballPoint = [];
+  ball = () => {
+    for(let i = 0; i < 3; i++){
+      for(let j = 0; j < 3; j++){
+
+      }
+      
+    }
+  }
+  ball();
+
+  ball02 = (i, j) => {
+    if(computerArr[i] == inputArr[j]){
+      if(i == j){
+        ballPoint[0] += 0;
+      }else{
+        ballPoint[0] += 1;
+      }
+    }
+  }
+  ball02();
 };
 gameStart();

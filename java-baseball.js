@@ -27,4 +27,39 @@ pushArr = () => {
 };
 pushArr();
 
-console.log(computerArr);
+//--
+
+alert(
+  "Game role : 같은 수가 같은 자리에 있으면 스트라이크, 다른 자리에 있으면 볼, 같은 수가 전혀 없으면 낫싱이란 힌트를 얻고, 그 힌트를 이용해서 먼저 상대방(컴퓨터)의 수를 맞추면 승리한다."
+);
+
+//--
+
+gameStart = () => {
+  const input = prompt(
+    "게임을 시작합니다. (서로 다른 3자리 자연수를 입력하세요)"
+  );
+  const inputArr = [...input];
+
+  //--
+
+  textCondition = () => {
+    if (input.length !== 3 || input !== /[^0-9]/) {
+      throw new Error("error : 서로 다른 3자리 자연수로 입력하세요.");
+    }
+  };
+  textCondition();
+
+  //--
+
+  const strikePoint = [];
+  strike = () => {
+    for (let i = 0; i < input.length; i++) {
+      if (inputArr[i] == strikePoint[i]) {
+        strikePoint += 1;
+      }
+    }
+  };
+  strike();
+};
+gameStart();

@@ -28,4 +28,3 @@ pushArr = () => {
 pushArr();
 
 console.log(computerArr);
-console.log(randomArr);

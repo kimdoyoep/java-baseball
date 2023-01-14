@@ -85,5 +85,11 @@ gameStart = () => {
     }
   }
   ball02();
+
+  hw = () => {
+    console.log(`hello world`);
+  }
+  hw();
+  
 };
 gameStart();

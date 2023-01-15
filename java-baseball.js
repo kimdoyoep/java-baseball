@@ -88,6 +88,8 @@ gameStart = () => {
   }
   ball02();
 
+  //--
+
   gameScore = () => {
     if(strikePoint[0] == 3){
       alert(`${strikePoint[0]}스트라이크`)
@@ -99,7 +101,18 @@ gameStart = () => {
         location.href = location.href;
       }
     }
+
+    if(strikePoint == 0 && ballPoint != 0){
+      alert(`${ballPoint[0]}볼`);
+      gameStart();
+    }
+
+    if(strikePoint != 0 && ballPoint == 0){
+      alert(`${strikePoint[0]}스트라이크`);
+      gameStart();
+    }
   }
   gameScore();
+
 };
 gameStart();

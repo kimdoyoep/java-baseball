@@ -44,8 +44,8 @@ gameStart = () => {
   //--
 
   textCondition = () => {
-    if (input.length !== 3 || input !== /[^0-9]/) {
-      alert("서로 다른 3자리 자연수로 입력하세요.")
+    if (input.length !== 3) {
+      alert("서로 다른 3자리 자연수로 입력하세요.");
       gameStart();
       throw new Error("error : 서로 다른 3자리 자연수로 입력하세요.");
     }
@@ -54,7 +54,7 @@ gameStart = () => {
 
   //--
 
-  const strikePoint = [];
+  const strikePoint = [0];
   strike = () => {
     for (let i = 0; i < input.length; i++) {
       if (inputArr[i] == computerArr[i]) {
@@ -66,53 +66,57 @@ gameStart = () => {
 
   //--
 
-  const ballPoint = [];
+  const ballPoint = [0];
   ball = () => {
-    for(let i = 0; i < 3; i++){
-      for(let j = 0; j < 3; j++){
-
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        ball02(i, j);
       }
-      
     }
-  }
+  };
   ball();
 
   ball02 = (i, j) => {
-    if(computerArr[i] == inputArr[j]){
-      if(i == j){
-        ballPoint[0] += 0;
-      }else{
+    if (computerArr[i] == inputArr[j]) {
+      if (i != j) {
         ballPoint[0] += 1;
       }
     }
-  }
-  ball02();
+  };
 
   //--
 
   gameScore = () => {
-    if(strikePoint[0] == 3){
-      alert(`${strikePoint[0]}스트라이크`)
-      if(!confirm("Victory! (게임을 재시작하시겠습니까?)")){
-        alert('Bye!');
-      }else{
+    if (strikePoint[0] == 3) {
+      alert(`${strikePoint[0]}스트라이크`);
+      if (!confirm("Victory! (게임을 재시작하시겠습니까?)")) {
+        alert("Bye!");
+      } else {
         location.reload();
         location.replace(location.href);
         location.href = location.href;
       }
     }
 
-    if(strikePoint == 0 && ballPoint != 0){
+    if (strikePoint == 0 && ballPoint != 0) {
       alert(`${ballPoint[0]}볼`);
       gameStart();
     }
 
-    if(strikePoint != 0 && ballPoint == 0){
+    if (strikePoint != 0 && ballPoint == 0) {
       alert(`${strikePoint[0]}스트라이크`);
       gameStart();
     }
-  }
-  gameScore();
 
+    if (strikePoint != 0 && ballPoint == 0) {
+      alert(`낫싱`);
+      gameStart();
+    }
+
+    if (strikePoint[0] < 3 && ballPoint[0] < 3) {
+      alert(`${ballPoint[0]}볼 ${strikePoint[0]}스트라이크`);
+    }
+  };
+  gameScore();
 };
 gameStart();

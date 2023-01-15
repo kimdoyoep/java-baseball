@@ -1,0 +1,138 @@
+const randomArr = [];
+
+pushZeroToNine = () => {
+  for (let i = 0; i < 10; i++) {
+    randomArr.push(i);
+  }
+  shuffle(randomArr);
+};
+pushZeroToNine();
+
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+//--
+
+const computerArr = [];
+
+pushArr = () => {
+  for (let i = 0; i < 3; i++) {
+    computerArr.push(randomArr[i]);
+    if (computerArr[0] === 0) {
+      computerArr[0] = randomArr[i + 1];
+      randomArr.splice(i + 1, 1);
+    }
+  }
+};
+pushArr();
+
+//--
+
+alert(
+  "Game role : 같은 수가 같은 자리에 있으면 스트라이크, 다른 자리에 있으면 볼, 같은 수가 전혀 없으면 낫싱이란 힌트를 얻고, 그 힌트를 이용해서 먼저 상대방(컴퓨터)의 수를 맞추면 승리한다."
+);
+
+//--
+
+gameStart = () => {
+  const input = prompt(
+    "게임을 시작합니다. (서로 다른 3자리 자연수를 입력하세요)"
+  );
+  const inputArr = [...input];
+
+  //--
+
+  textCondition = () => {
+    if (input.length !== 3) {
+      alert("서로 다른 3자리 자연수로 입력하세요.");
+      gameStart();
+      throw new Error("error : 서로 다른 3자리 자연수로 입력하세요.");
+    }
+  };
+  textCondition();
+
+  //--
+
+  const strikePoint = [0];
+  strike = () => {
+    for (let i = 0; i < input.length; i++) {
+      if (inputArr[i] == computerArr[i]) {
+        strikePoint[0] += 1;
+      }
+    }
+  };
+  strike();
+
+  //--
+
+  const ballPoint = [0];
+  // ball = () => {
+  //   for (let i = 0; i < 3; i++) {
+  //     for (let j = 0; j < 3; j++) {
+  //       ball02(i, j);
+  //     }
+  //   }
+  // };
+  // ball();
+
+  // ball02 = (i, j) => {
+  //   if (computerArr[i] == inputArr[j]) {
+  //     if (i != j) {
+  //       ballPoint[0] += 1;
+  //     }
+  //   }
+  // };
+
+  ball = () => {
+    if (computerArr[0] == inputArr[1] || computerArr[0] == inputArr[2]) {
+      ballPoint[0] += 1;
+    }
+
+    if (computerArr[1] == inputArr[2] || computerArr[1] == inputArr[0]) {
+      ballPoint[0] += 1;
+    }
+
+    if (computerArr[2] == inputArr[0] || computerArr[2] == inputArr[1]) {
+      ballPoint[0] += 1;
+    }
+  };
+  ball();
+
+  //--
+
+  gameScore = () => {
+    if (strikePoint[0] == 3) {
+      alert(`${strikePoint[0]}스트라이크`);
+      if (!confirm("Victory! (게임을 재시작하시겠습니까?)")) {
+        alert("Bye!");
+      } else {
+        location.reload();
+        location.replace(location.href);
+        location.href = location.href;
+      }
+    }
+
+    if (strikePoint == 0 && ballPoint != 0) {
+      alert(`${ballPoint[0]}볼`);
+      gameStart();
+    }
+
+    if (strikePoint != 0 && ballPoint == 0) {
+      alert(`${strikePoint[0]}스트라이크`);
+      gameStart();
+    }
+
+    if (strikePoint == 0 && ballPoint == 0) {
+      alert(`낫싱`);
+      gameStart();
+    }
+
+    if (strikePoint[0] != 0 && ballPoint[0] != 0 && strikePoint[0] < 3) {
+      alert(`${ballPoint[0]}볼 ${strikePoint[0]}스트라이크`);
+      gameScore();
+    }
+  };
+  gameStart();
+};
+gameStart();

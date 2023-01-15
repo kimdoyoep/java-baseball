@@ -58,7 +58,7 @@ gameStart = () => {
   strike = () => {
     for (let i = 0; i < input.length; i++) {
       if (inputArr[i] == computerArr[i]) {
-        strikePoint += 1;
+        strikePoint[0] += 1;
       }
     }
   };
@@ -67,22 +67,37 @@ gameStart = () => {
   //--
 
   const ballPoint = [0];
+  // ball = () => {
+  //   for (let i = 0; i < 3; i++) {
+  //     for (let j = 0; j < 3; j++) {
+  //       ball02(i, j);
+  //     }
+  //   }
+  // };
+  // ball();
+
+  // ball02 = (i, j) => {
+  //   if (computerArr[i] == inputArr[j]) {
+  //     if (i != j) {
+  //       ballPoint[0] += 1;
+  //     }
+  //   }
+  // };
+
   ball = () => {
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        ball02(i, j);
-      }
+    if (computerArr[0] == inputArr[1] || computerArr[0] == inputArr[2]) {
+      ballPoint[0] += 1;
+    }
+
+    if (computerArr[1] == inputArr[2] || computerArr[1] == inputArr[0]) {
+      ballPoint[0] += 1;
+    }
+
+    if (computerArr[2] == inputArr[0] || computerArr[2] == inputArr[1]) {
+      ballPoint[0] += 1;
     }
   };
   ball();
-
-  ball02 = (i, j) => {
-    if (computerArr[i] == inputArr[j]) {
-      if (i != j) {
-        ballPoint[0] += 1;
-      }
-    }
-  };
 
   //--
 
@@ -108,15 +123,16 @@ gameStart = () => {
       gameStart();
     }
 
-    if (strikePoint != 0 && ballPoint == 0) {
+    if (strikePoint == 0 && ballPoint == 0) {
       alert(`낫싱`);
       gameStart();
     }
 
-    if (strikePoint[0] < 3 && ballPoint[0] < 3) {
+    if (strikePoint[0] != 0 && ballPoint[0] != 0 && strikePoint[0] < 3) {
       alert(`${ballPoint[0]}볼 ${strikePoint[0]}스트라이크`);
+      gameScore();
     }
   };
-  gameScore();
+  gameStart();
 };
 gameStart();

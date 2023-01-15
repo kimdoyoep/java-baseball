@@ -45,6 +45,8 @@ gameStart = () => {
 
   textCondition = () => {
     if (input.length !== 3 || input !== /[^0-9]/) {
+      alert("서로 다른 3자리 자연수로 입력하세요.")
+      gameStart();
       throw new Error("error : 서로 다른 3자리 자연수로 입력하세요.");
     }
   };
@@ -86,10 +88,18 @@ gameStart = () => {
   }
   ball02();
 
-  hw = () => {
-    console.log(`hello world`);
+  gameScore = () => {
+    if(strikePoint[0] == 3){
+      alert(`${strikePoint[0]}스트라이크`)
+      if(!confirm("Victory! (게임을 재시작하시겠습니까?)")){
+        alert('Bye!');
+      }else{
+        location.reload();
+        location.replace(location.href);
+        location.href = location.href;
+      }
+    }
   }
-  hw();
-  
+  gameScore();
 };
 gameStart();
